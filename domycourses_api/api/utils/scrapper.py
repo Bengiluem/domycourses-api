@@ -1,7 +1,8 @@
+from marmiton import MarmitonScrapper
 
 
 def get_marmiton(url):
-    print("Getting url: ", url)
+    return MarmitonScrapper.parse_url(url)
 
 
 def get_items(urls):
