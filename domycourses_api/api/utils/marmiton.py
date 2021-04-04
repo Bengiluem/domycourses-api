@@ -29,7 +29,7 @@ class MarmitonScrapper(object):
                 name = MarmitonScrapper.__clean_text(ingredient.find(class_='ingredient-name'))
                 complement = MarmitonScrapper.__clean_text(ingredient.find(class_='ingredient-complement'))
                 parsed_ingredients[name] = {
-                    "quantity": float(quantity) if quantity != "" else None,
+                    "quantity": float(quantity) if quantity != "" else 1.0,
                     "unit": unit if unit != "" else None,
                     "complement": complement if complement != "" else None
                 }
@@ -64,8 +64,3 @@ class MarmitonUnitCombiner(object):
                 "unit": units[min_index],
                 "quantity": (value1 / (1000 ^ (index1 - min_index))) + (value2 / (1000 ^ (index2 - min_index)))
             }
-
-
-
-
-

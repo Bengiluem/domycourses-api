@@ -7,4 +7,5 @@ data = {
     ]
 }
 url = "http://localhost:8000/api/recipes/"
-requests.post(url, data=data)
+response = requests.post(url, data=data)
+print(response.json())
