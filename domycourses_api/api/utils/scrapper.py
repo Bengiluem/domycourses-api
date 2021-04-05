@@ -29,7 +29,7 @@ def assemble(recipes):
                     if ingredient_details["complement"] is not None:
                         ingredients[ingredient_name]["complement"].add(ingredient_details["complement"])
                 except MarmitonCombinerException:
-                    logging.error(f"Impossible to combine {ingredient_details['quantity']} {ingredient_details['unit']} with {ingredients[ingredient_name]['quantity']} {ingredients[ingredient_name]['unit']}")
+                    logging.error(f"Impossible to combine {ingredient_details['quantity']} {ingredient_details['unit']} with {ingredients[ingredient_name]['quantity']} {ingredients[ingredient_name]['unit']} for ingredient {ingredient_name}")
             else:
                 ingredients[ingredient_name] = {
                     "unit": ingredient_details["unit"],
