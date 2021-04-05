@@ -1,16 +1,25 @@
 import logging
 from .marmiton import MarmitonScrapper, MarmitonScrapperException, MarmitonUnitCombiner, MarmitonCombinerException
+from ..models import Recipe
 
 
 def get_items(urls):
     recipes = []
     for url in urls:
-        if "https://www.marmiton.org/" in url:
-            logging.info(f"Getting {url}")
-            try:
-                recipes.append(MarmitonScrapper.parse_url(url))
-            except MarmitonScrapperException:
-                logging.error(f"Impossible to get {url}")
+        try:
+            recipe = Recipe.objects.get(url=url)
+            logging.info("Successfully provided cached url "+url)
+            recipes.append(recipe.content)
+        except Recipe.DoesNotExist:
+            if "https://www.marmiton.org/" in url:
+                logging.info(f"Getting {url}")
+                try:
+                    recipe = MarmitonScrapper.parse_url(url)
+                    recipes.append(recipe)
+                    Recipe(url=url, content=recipe).save()
+                    logging.info("Successfully retrieved & cached url " + url)
+                except MarmitonScrapperException:
+                    logging.error(f"Impossible to get {url}")
     assembly = assemble(recipes)
     for key, value in assembly.items():
         value["complement"] = ", ".join(value["complement"])

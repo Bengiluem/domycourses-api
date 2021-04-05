@@ -1,10 +1,9 @@
 from django.db import models
 
 
-class Ingredient(models.Model):
-    name = models.CharField(max_length=50, primary_key=True)
-
-
 class Recipe(models.Model):
-    name = models.CharField(max_length=50)
-    ingredients = models.ManyToManyField(Ingredient)
+    url = models.CharField(max_length=100, default="", primary_key=True)
+    content = models.JSONField()
+
+    def __str__(self):
+        return str.format("{url} <-> {name}", url=self.url, name=self.content)
