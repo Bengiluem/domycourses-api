@@ -1,5 +1,7 @@
-# domycourses-api
-Api for DoMyCourses
+# DoMyCourses
+
+This repository is a small web application to automate your grocery shopping. Basically, you provide the application a list of recipes (from website urls or manually) you want to do the following week, and the application computes your final grocery list.  
+The application relies on a ReactNative front-end & a Django backend.
 
 ## Database
 
